@@ -1,4 +1,10 @@
-import { Controller, Req, Res, Post, Body } from '@nestjs/common';
+import { 
+    Controller, 
+    Req, 
+    Res, 
+    Post, 
+    Body 
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserDTO } from './dto/user.dto';
 import { Request, Response } from 'express';
@@ -8,8 +14,8 @@ export class AuthController {
     constructor(private authService : AuthService){}
 
     @Post('/register')
-    async registerAccount(@Req() req : Request, @Body() UserDTO : UserDTO) : Promise<any> {
-        return await this.authService.registerUser(UserDTO);
+    async registerAccount(@Req() req : Request, @Body() userDTO : UserDTO) : Promise<any> {
+        return await this.authService.registerUser(userDTO);
     }
 
     @Post('/login')

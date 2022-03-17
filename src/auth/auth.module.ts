@@ -5,14 +5,18 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserRepository } from './user.repository';
 import { UserSurvice } from './user.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports : [
     TypeOrmModule.forFeature([UserRepository]),
-    JwtModule.register({
-      secret : 'secret_key',
-      signOptions : {expiresIn : '300s'},
+    JwtModule.registerAsync({
+      inject : [ConfigService],
+      useFactory : (config : ConfigService) => ({
+        secret : config.get<string>('SECRET_KEY'),
+        signOptions : {expiresIn : '300s'},
       })
+    })
     ],
 
   exports : [TypeOrmModule],
