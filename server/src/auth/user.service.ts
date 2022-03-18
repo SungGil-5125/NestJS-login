@@ -25,6 +25,7 @@ export class UserSurvice{
 
     async transformrPassword(user : UserDTO ): Promise<void> {
         //async 요청을 한 뒤에 아무것도 리턴 해주지 않기 때문에 void를 쓴다.
+        
         user.password = await bcrypt.hash(
             user.password, 10,
         )
